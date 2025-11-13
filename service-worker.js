@@ -1,12 +1,13 @@
 const CACHE_NAME = "xray-map-cache-v1";
-
 const urlsToCache = [
   "/",
   "/index.html",
   "/style.css",
   "/script.js",
   "/data.js",
-  "/manifest.json"
+  "/manifest.json",
+  "/icon-192.png",
+  "/icon-512.png"
 ];
 
 // Install SW
@@ -26,3 +27,4 @@ self.addEventListener("fetch", event => {
     })
   );
 });
+
