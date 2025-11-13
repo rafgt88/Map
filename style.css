@@ -110,5 +110,9 @@ html, body {
     #map {
         left: 260px;
     }
+    
+.navbar-logo{
+    max-width:200px;
+}
 }
 
