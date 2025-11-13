@@ -1,35 +1,42 @@
-body {
+html, body {
+    height: 100%;
     margin: 0;
     font-family: Arial, sans-serif;
     background: #1a1a1a;
     color: white;
 }
 
-/* Map layout */
-#map {
-    position: absolute;
-    top: 0;
-    left: 300px;
-    right: 0;
-    bottom: 0;
-    transition: 0.3s;
+/* NAVBAR */
+.custom-navbar {
+    background-color: #0A2A58;
 }
 
-#map.full {
-    left: 0 !important;
+.navbar-logo {
+    max-height: 40px;
+    height: 40px;
+}
+
+/* MAIN APP LAYOUT */
+#app-container {
+    position: absolute;
+    top: 56px; /* approx navbar height */
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
 /* Sidebar */
 #sidebar {
     width: 300px;
     background: #111;
-    height: 100vh;
+    height: 100%;
     padding: 15px;
     box-sizing: border-box;
     border-right: 2px solid #222;
     position: absolute;
     overflow-y: auto;
     transition: transform 0.3s ease;
+    z-index: 500; /* above map */
 }
 
 #sidebar.hidden {
@@ -70,35 +77,36 @@ body {
     background: #333;
 }
 
-/* Toggle button */
-#toggle-btn {
+/* Map */
+#map {
     position: absolute;
-    top: 15px;
-    left: 310px;
-    z-index: 10000;
-    background: #111;
-    color: white;
-    border: 1px solid #333;
-    padding: 8px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s;
+    top: 0;
+    left: 300px;
+    right: 0;
+    bottom: 0;
+    transition: left 0.3s ease;
 }
 
-#toggle-btn:hover {
-    background: #222;
+#map.full {
+    left: 0 !important;
 }
 
-#toggle-btn.shifted {
-    left: 15px;
+/* Modal overrides */
+.modal-content.bg-dark {
+    background-color: #111 !important;
 }
 
-/* Mobile Fix */
-@media (max-width: 600px) {
+/* Mobile Tweaks */
+@media (max-width: 768px) {
     #sidebar {
         width: 260px;
     }
-    #toggle-btn {
-        left: 270px;
+
+    #sidebar.hidden {
+        transform: translateX(-260px);
+    }
+
+    #map {
+        left: 260px;
     }
 }
