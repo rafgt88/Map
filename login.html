@@ -2,15 +2,22 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Login — Barakat Al-Mayaar</title>
-    <link rel="stylesheet" href="login.css">
+    <title>B-Almayaar Map Access</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="login.css">
 </head>
 
 <body>
 
+<!-- LOGO -->
+<div class="logo-container">
+    <img src="logo-navbar.png" class="login-logo" alt="Barakat Al-Mayaar">
+</div>
+
+<!-- LOGIN BOX -->
 <div id="login-box">
-    <h2>Engineer Login</h2>
+    <h2>B-Almayaar Map Access:</h2>
 
     <input type="text" id="username" placeholder="Username">
     <input type="password" id="password" placeholder="Password">
@@ -21,13 +28,14 @@
 </div>
 
 <script src="users.js"></script>
+
 <script>
+// SHA-256 hashing function
 async function sha256(message) {
     const msgBuffer = new TextEncoder().encode(message);
     const hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer);
     const hashArray = Array.from(new Uint8Array(hashBuffer));
-    const hashHex = hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
-    return hashHex;
+    return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
 }
 
 document.getElementById("login-btn").addEventListener("click", async function () {
@@ -39,20 +47,14 @@ document.getElementById("login-btn").addEventListener("click", async function ()
         return;
     }
 
-    let inputHash;
-    try {
-        inputHash = await sha256(pass);
-    } catch (e) {
-        document.getElementById("error").textContent = "Your browser does not support secure login.";
-        return;
-    }
+    const inputHash = await sha256(pass);
 
     const found = users.find(u =>
         u.username === user && u.passwordHash === inputHash
     );
 
     if (found) {
-        localStorage.setItem("logged_in", "true");
+        sessionStorage.setItem("logged_in", "true");
         window.location.href = "index.html";
     } else {
         document.getElementById("error").textContent = "Invalid username or password";
