@@ -1,0 +1,2 @@
+# Map
+installation sites map
