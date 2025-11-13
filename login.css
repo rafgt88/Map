@@ -1,36 +1,55 @@
+/* Light background */
 body {
     margin: 0;
-    background: #1a1a1a;
+    background: #f2f2f2;
     font-family: Arial, sans-serif;
-    color: white;
+    color: #333;
 }
 
+/* Logo above the login box */
+.logo-container {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.login-logo {
+    max-height: 70px;
+}
+
+/* Login box */
 #login-box {
-    width: 300px;
-    margin: 150px auto;
-    background: #111;
+    width: 320px;
+    margin: 30px auto;
+    background: #0A2A58; /* Dark Blue */
+    color: white;
     padding: 25px;
     border-radius: 10px;
     text-align: center;
-    border: 1px solid #333;
+    box-shadow: 0px 0px 12px rgba(0,0,0,0.3);
 }
 
 #login-box h2 {
     margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: bold;
 }
 
+/* Input fields */
 #login-box input {
     width: 90%;
     padding: 10px;
     margin: 10px 0;
     border: none;
+    outline: none;
     border-radius: 5px;
 }
 
+/* Login button */
 #login-box button {
     width: 95%;
     padding: 10px;
-    background: #444;
+    background: #1f4c90;
     color: white;
     border: none;
     border-radius: 5px;
@@ -38,10 +57,11 @@ body {
 }
 
 #login-box button:hover {
-    background: #666;
+    background: #2d64b3;
 }
 
 #error {
-    color: red;
+    color: #ffcccc;
     margin-top: 10px;
+    min-height: 20px;
 }
