@@ -1,7 +1,7 @@
 /* Light background */
 body {
     margin: 0;
-    background: #f2f2f2;
+    background: #2f389e;
     font-family: Arial, sans-serif;
     color: #333;
 }
@@ -65,3 +65,4 @@ body {
     margin-top: 10px;
     min-height: 20px;
 }
+
