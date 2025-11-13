@@ -1,14 +1,4 @@
-// Iraq bounding box
-const iraqBounds = [
-    [29.0, 38.8],
-    [37.5, 48.6]
-];
-
-// Initialize map
-const map = L.map('map', {
-    maxBounds: iraqBounds,
-    maxBoundsViscosity: 1.0
-}).setView([33.0, 44.0], 6);
+const map = L.map('map').setView([33.0, 44.0], 6);
 
 // Base layers: light & dark
 const lightLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -151,3 +141,4 @@ sidebarToggle.addEventListener('click', () => {
         map.invalidateSize();
     }, 310);
 });
+
