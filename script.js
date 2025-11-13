@@ -10,11 +10,48 @@ const map = L.map('map', {
     maxBoundsViscosity: 1.0
 }).setView([33.0, 44.0], 6);
 
-// NORMAL LIGHT MAP TILES
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+// Base layers: light & dark
+const lightLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18,
-    minZoom: 5,
-}).addTo(map);
+    minZoom: 5
+});
+
+const darkLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    maxZoom: 18,
+    minZoom: 5
+});
+
+let activeBaseLayer = null;
+let currentTheme = localStorage.getItem("map_theme") || "light";
+
+const themeToggleBtn = document.getElementById("theme-toggle");
+
+function setTheme(theme) {
+    if (activeBaseLayer) {
+        map.removeLayer(activeBaseLayer);
+    }
+
+    if (theme === "dark") {
+        activeBaseLayer = darkLayer;
+        themeToggleBtn.textContent = "☀️ Light";
+    } else {
+        activeBaseLayer = lightLayer;
+        themeToggleBtn.textContent = "🌙 Dark";
+    }
+
+    activeBaseLayer.addTo(map);
+    currentTheme = theme;
+    localStorage.setItem("map_theme", theme);
+}
+
+// Initialize theme
+setTheme(currentTheme);
+
+// Theme toggle button
+themeToggleBtn.addEventListener("click", () => {
+    const nextTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(nextTheme);
+});
 
 // Warranty icons
 const greenIcon = new L.Icon({
@@ -33,13 +70,11 @@ const redIcon = new L.Icon({
     popupAnchor: [1, -34]
 });
 
-
 // Sidebar + markers
 const list = document.getElementById('site-list');
 const markers = [];
 
 sites.forEach((site, index) => {
-
     const icon = site.warranty ? greenIcon : redIcon;
     const marker = L.marker([site.lat, site.lng], { icon }).addTo(map);
 
@@ -49,7 +84,7 @@ sites.forEach((site, index) => {
         <b>${site.name}</b><br>
         Machines: ${site.machines}<br>
         Serials:<br>${serialList}<br><br>
-        Warranty: 
+        Warranty:
         <span style="color:${site.warranty ? 'lightgreen' : 'red'};">
             ${site.warranty ? 'Active' : 'Expired'}
         </span><br><br>
@@ -59,19 +94,32 @@ sites.forEach((site, index) => {
         </a>
     `);
 
+    // Popup pan fix (important for mobile near top)
+    marker.on("click", () => {
+        // Let leaflet open popup, then pan a bit down so popup is fully visible
+        setTimeout(() => {
+            const offsetY = window.innerWidth < 768 ? -150 : -100;
+            map.panBy([0, offsetY], { animate: true });
+        }, 250);
+    });
+
     markers.push(marker);
 
-    // Sidebar link
+    // Sidebar list item
     const li = document.createElement('li');
     li.textContent = site.name;
     li.onclick = () => {
         map.setView([site.lat, site.lng], 12);
         marker.openPopup();
+        setTimeout(() => {
+            const offsetY = window.innerWidth < 768 ? -150 : -100;
+            map.panBy([0, offsetY], { animate: true });
+        }, 250);
     };
     list.appendChild(li);
 });
 
-// Search
+// Search filter
 document.getElementById('search').addEventListener('input', function () {
     const q = this.value.toLowerCase();
 
@@ -86,14 +134,17 @@ document.getElementById('search').addEventListener('input', function () {
     });
 });
 
-// Sidebar toggle
+// Sidebar toggle (navbar Menu button)
 const sidebar = document.getElementById('sidebar');
-const toggleBtn = document.getElementById('toggle-btn');
+const sidebarToggle = document.getElementById('sidebar-toggle');
 const mapDiv = document.getElementById('map');
 
-toggleBtn.addEventListener('click', () => {
+// Start with sidebar hidden and map full
+sidebar.classList.add('hidden');
+mapDiv.classList.add('full');
+
+sidebarToggle.addEventListener('click', () => {
     sidebar.classList.toggle('hidden');
-    toggleBtn.classList.toggle('shifted');
     mapDiv.classList.toggle('full');
 
     setTimeout(() => {
