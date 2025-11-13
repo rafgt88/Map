@@ -1,48 +1,141 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="utf-8" />
+
+    <!-- FORCE LOGIN FIRST -->
     <script>
-if (localStorage.getItem("logged_in") !== "true") {
+    if (sessionStorage.getItem("logged_in") !== "true") {
     window.location.href = "login.html";
 }
-</script>
-    <meta charset="utf-8" />
+    </script>
+
     <title>Iraq X-Ray Installations — Barakat Al-Mayaar</title>
 
-    <!-- Leaflet CSS + JS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
-    <!-- App Style -->
-    <link rel="stylesheet" href="style.css" />
-    <link rel="manifest" href="manifest.json">
-
-<!-- App icons for iOS -->
-<link rel="apple-touch-icon" href="icon-192.png">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PWA manifest (if you already have one, keep its name/path) -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0A2A58">
+    <link rel="apple-touch-icon" href="icon-192.png">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+    <!-- App CSS -->
+    <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
 
-<!-- Toggle Button -->
-<button id="toggle-btn">☰</button>
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
+    <div class="container-fluid">
 
-<!-- Sidebar -->
-<div id="sidebar">
-    <h2>📍 Installation Sites</h2>
-    <input type="text" id="search" placeholder="Search by name or serial...">
-    <ul id="site-list"></ul>
+        <!-- Left side: Menu + About -->
+        <div class="d-flex align-items-center">
+            <button class="btn btn-outline-light me-2" id="sidebar-toggle">☰ Menu</button>
+
+            <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#aboutModal">
+                About Us
+            </button>
+        </div>
+
+        <!-- Center logo -->
+        <div class="mx-auto d-none d-sm-block">
+            <img src="logo-navbar.png" alt="Barakat Mayaar" class="navbar-logo">
+        </div>
+
+        <!-- Right side: Theme toggle -->
+        <div class="ms-auto">
+            <button class="btn btn-outline-light" id="theme-toggle">🌙 Dark</button>
+        </div>
+    </div>
+</nav>
+
+<!-- MAIN APP AREA -->
+<div id="app-container">
+    <!-- Sidebar (starts hidden) -->
+    <div id="sidebar" class="hidden">
+        <h2>📍 Installation Sites</h2>
+        <input type="text" id="search" placeholder="Search by name or serial...">
+        <ul id="site-list"></ul>
+    </div>
+
+    <!-- Map -->
+    <div id="map" class="full"></div>
 </div>
 
-<!-- Map -->
-<div id="map"></div>
+<!-- ABOUT US MODAL -->
+<div class="modal fade" id="aboutModal" tabindex="-1" aria-labelledby="aboutModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content bg-dark text-light">
+      <div class="modal-header">
+        <h5 class="modal-title" id="aboutModalLabel">About Barakat Al-Mayaar</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>
+          <strong>Barakat Al-Mayaar for General Trade &amp; Economic Consults</strong> is the
+          exclusive distributor and official partner of <strong>Astrophysics Inc. (USA)</strong>
+          in Iraq. We provide installation, maintenance, warranty support, and technical
+          consultancy for X-Ray security inspection systems across all Iraqi provinces.
+        </p>
 
+        <p>Our supplied and supported systems are deployed at:</p>
+        <ul>
+          <li>The Supreme Judicial Council and its courts across all governorates.</li>
+          <li>Multiple border ports within the Kurdistan Region.</li>
+          <li>The Iraqi Parliament.</li>
+          <li>Ministry of Communications – State Company for Post &amp; Savings.</li>
+          <li>All Asiacell offices throughout Iraq.</li>
+          <li>Presidential sites in Baghdad and the Kurdistan Region.</li>
+        </ul>
+
+        <p><strong>Official websites:</strong></p>
+        <ul>
+          <li>Barakat Al-Mayaar: <a href="https://www.b-almayaar.com" target="_blank">www.b-almayaar.com</a></li>
+          <li>Astrophysics Inc.: <a href="https://www.astrophysicsinc.com" target="_blank">www.astrophysicsinc.com</a></li>
+        </ul>
+
+        <p><strong>Contact Information</strong></p>
+        <p>
+          <strong>Management:</strong><br>
+          Numan A. Numan – <a href="tel:+9647715060536">+964 771 506 0536</a> –
+          <a href="mailto:numan@b-almayaar.com">numan@b-almayaar.com</a>
+        </p>
+        <p>
+          <strong>Sales &amp; Service:</strong><br>
+          Main office: <a href="tel:+9647804946770">+964 780 494 6770</a><br>
+          Email: <a href="mailto:info@b-almayaar.com">info@b-almayaar.com</a>,
+          <a href="mailto:sales@b-almayaar.com">sales@b-almayaar.com</a>,
+          <a href="mailto:service@b-almayaar.com">service@b-almayaar.com</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<!-- Data + App logic -->
 <script src="data.js"></script>
 <script src="script.js"></script>
 
+<!-- PWA service worker registration (if you have service-worker.js) -->
+<script>
+if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("service-worker.js")
+        .catch(() => {});
+}
+</script>
+
 </body>
 </html>
-
