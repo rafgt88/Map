@@ -1,0 +1,104 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #1a1a1a;
+    color: white;
+}
+
+/* Map layout */
+#map {
+    position: absolute;
+    top: 0;
+    left: 300px;
+    right: 0;
+    bottom: 0;
+    transition: 0.3s;
+}
+
+#map.full {
+    left: 0 !important;
+}
+
+/* Sidebar */
+#sidebar {
+    width: 300px;
+    background: #111;
+    height: 100vh;
+    padding: 15px;
+    box-sizing: border-box;
+    border-right: 2px solid #222;
+    position: absolute;
+    overflow-y: auto;
+    transition: transform 0.3s ease;
+}
+
+#sidebar.hidden {
+    transform: translateX(-300px);
+}
+
+#sidebar h2 {
+    margin-top: 0;
+    font-size: 18px;
+    text-align: center;
+}
+
+#search {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+#site-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#site-list li {
+    padding: 10px;
+    margin-bottom: 6px;
+    background: #222;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#site-list li:hover {
+    background: #333;
+}
+
+/* Toggle button */
+#toggle-btn {
+    position: absolute;
+    top: 15px;
+    left: 310px;
+    z-index: 10000;
+    background: #111;
+    color: white;
+    border: 1px solid #333;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#toggle-btn:hover {
+    background: #222;
+}
+
+#toggle-btn.shifted {
+    left: 15px;
+}
+
+/* Mobile Fix */
+@media (max-width: 600px) {
+    #sidebar {
+        width: 260px;
+    }
+    #toggle-btn {
+        left: 270px;
+    }
+}
