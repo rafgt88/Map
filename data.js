@@ -59,10 +59,10 @@ const sites = [
     },
     {
         name: "AsiaCell kirkuk",
-        lat:35.45687608232148, lng:44.381963410958726,
+        lat:35.523113,lng:44.382908,
         machines: 1,
-        serials: ["ASTXA180XDX420"],
-        waze: "https://waze.com/ul?ll=35.45687608232148, 44.381963410958726&navigate=yes",
+        serials: ["ASTUA090XS2460"],
+        waze: "https://waze.com/ul?ll=35.523113,44.382908&navigate=yes",
         contact: "Mohammed - +9647701105571",
         warranty: false
     },
@@ -70,7 +70,7 @@ const sites = [
         name: "AsiaCell Tikrit",
         lat:34.58651852595826, lng:43.68038231276244,
         machines: 1,
-        serials: ["ASTXA180XDX420"],
+        serials: ["ASTUA090XS2461"],
         waze: "https://waze.com/ul?ll=34.58651852595826, 43.68038231276244&navigate=yes",
         contact: "tikrit - +9647701106602",
         warranty:false
