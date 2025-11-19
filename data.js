@@ -262,6 +262,14 @@ const sites = [
         waze: "https://waze.com/ul?ll=36.33637265026683, 43.14222646875899&navigate=yes",
         contact: "Eng. Rafi Ahmed - +9647838009330",
         warranty: true
+    },
+    {
+        name:"gulan mall",
+        lat:36.2122995,lng:43.9915055,
+        machines:4,
+        serials:["ast","ast","ast","ast"],
+        waze: "https://waze.com/ul?ll=36.2122995,43.9915055&navigate=yes",
+        warranty:false
     }
     
 ];
