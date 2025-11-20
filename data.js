@@ -50,11 +50,11 @@ const sites = [
     },
     {
         name: "AsiaCell Erbil",
-        lat:36.181880607818016, lng:43.993507668669096,
+        lat:36.1813855, lng:43.9935678,
         machines: 1,
         serials: ["ASTXA180XDX420"],
-        waze: "https://waze.com/ul?ll=36.181880607818016, 43.993507668669096&navigate=yes",
-        contact: "Eng. Rafi Ahmed - +9647838009330",
+        waze: "https://waze.com/ul?ll=36.1813855,43.9935678&navigate=yes",
+        contact: "زانا غريب - +964 770 110 5017",
         warranty: false
     },
     {
@@ -271,5 +271,6 @@ const sites = [
         waze: "https://waze.com/ul?ll=36.2122995,43.9915055&navigate=yes",
         warranty:false
     }
+    
     
 ];
