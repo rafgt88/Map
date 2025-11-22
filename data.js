@@ -1,6 +1,35 @@
 const sites = [
     {
-        name: "Ibrahim Al-Khalil Border",
+        name: "Asiacell suleymanyiah",
+        lat: 35.5610088,
+        lng: 45.4132962,
+        machines: 1,
+        serials: ["ASTXA180XDX430"],
+        waze: "https://waze.com/ul?ll=35.5610088,45.4132962&navigate=yes",
+        contact: "usta - +9647701105118 ",
+        warranty: false
+    },
+    {
+        name: "gulan mall erbil",
+        lat: 36.2123937,
+        lng: 43.9913084,
+        machines: 2,
+        serials: ["ASTXA180XDX---","ASTVA160SMN---"],
+        waze: "https://waze.com/ul?ll=36.2123937,43.9913084&navigate=yes",
+        contact: "no info yet ",
+        warranty: false
+    },
+    {
+        name: "presidental residents",
+        lat: 36.1989673,
+        lng: 43.9834555,
+        machines: 4,
+        serials: ["ASTWD180XDX521","ASTWD160SMN188","ASTXB160SMN204","ASTXB160SMN198"],
+        waze: "https://waze.com/ul?ll=36.1989673,43.9834555&navigate=yes",
+        contact: "farhank - +9647502386868 ",
+        warranty: false
+    },
+    {name: "Ibrahim Al-Khalil Border",
         lat: 37.1333,
         lng: 42.5667,
         machines: 2,
